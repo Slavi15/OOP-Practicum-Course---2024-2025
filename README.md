@@ -1,2 +1,3 @@
-# OOP-Practicum-Course---2024-2025
-OOP Practicum Course 2024-2025 @ FMI Sofia University "St. Kliment Ohridski"
+# OOP 2024-2025
+
+### This course was conducted by me and [Martin Marinkov](https://github.com/MartinM2304)
