@@ -1,5 +1,40 @@
 <h1 align="center">ООП - Практикум - 26.02.2025 - Седмица 02</h1>
 
+## Теоретични въпроси
+
+**Задача 1:** Отворили сте файл в режим за четене със следното съдържание:
+```plaintext
+"OOP is the best FMI course"
+```
+Какво ще се изведе на конзолата след изпълнение на следния код?
+```c++
+#include <iostream>
+#include <fstream>
+
+int main()
+{
+    char symbol;
+
+    file.seekg(5, std::ios::beg);
+    symbol = file.get();
+    std::cout << symbol << std::endl;
+
+    file.seekg(-4, std::ios::cur);
+    symbol = file.get();
+    std::cout << symbol << std::endl;
+
+    file.seekg(-2, std::ios::end);
+    symbol = file.get();
+    std::cout << symbol << std::endl;
+
+    file.seekg(-1, std::ios::cur);
+    symbol = file.get();
+    std::cout << symbol << std::endl;
+
+    return 0;
+}
+```
+
 ## Задача 1
 Да се напише функция, която чете от конзолата 3 числа, и записва във файл с име `result.txt` сумата и произведението им. 
 Да се напише функция, която чете от файла `result.txt` двете получени стойности, и отпечатва на конзолата разликата им
