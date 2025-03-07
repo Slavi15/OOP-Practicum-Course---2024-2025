@@ -1,0 +1,51 @@
+#include <iostream>
+
+bool any(const int* arr, int size, bool (*predicate)(int)) {
+    for (int i = 0; i < size; i++) {
+        if (predicate(arr[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool all(const int* arr, int size, bool (*predicate)(int)) {
+    for (int i = 0; i < size; i++) {
+        if (!predicate(arr[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool none(const int* arr, int size, bool (*predicate)(int)) {
+    for (int i = 0; i < size; i++) {
+        if (predicate(arr[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+const int* find_if(const int* arr, int size, bool (*predicate)(int)) {
+    for (int i = 0; i < size; i++) {
+        if (predicate(arr[i])) {
+            return &arr[i];
+        }
+    }
+    return nullptr;
+}
+
+bool isEven(int n){
+	return (n%2==0);
+}
+
+bool isOdd(int n){
+	return (n%2==0);
+}
+
+int main(){
+	int arr[]={1,2,3,4,5};
+	std::cout<<any(arr,5,isEven);
+	return 0;
+}
