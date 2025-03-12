@@ -757,10 +757,8 @@ void replace(const char* fileName, char ch1, char ch2)
 
 ## stringstream
 
-- Поток за работа със символни низове
-- Достъп до всички методи на `iostream` (както при **fstream**, трябва да синхронизираме потока)
-- Позволява форматирано четене / писане от низове
-- Автоматично преобразуване между типовете при четене / писане
+- Достъп до всички методи на `iostream`
+- Автоматично **"string"**-ване
 
 **Пример:**
 
@@ -768,22 +766,11 @@ void replace(const char* fileName, char ch1, char ch2)
 #include <iostream>
 #include <sstream>
 
-constexpr size_t SIZE = 1024;
-
 int main()
 {
-	std::stringstream ss("21 42.42 ABC");
-
-	int x;
-	ss >> x;
-
-	double d;
-	ss >> d;
-
-	char buff[SIZE + 1];
-	ss >> buff;
-
-	std::cout << x << " " << d << " " << buff << std::endl; // 21 42.42 ABC
+	std::stringstream ss("ABC");
+	ss << 3;
+	std::cout << ss.str() << std::endl; // 3BC
 
 	return 0;
 }
