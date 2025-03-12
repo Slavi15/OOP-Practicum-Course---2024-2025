@@ -58,6 +58,55 @@ struct X
 - Конструктор с един параметър
 - **explicit** (указва, че конструкторът **НЕ** е конвертиращ)
 
+```c++
+#include <iostream>
+
+constexpr size_t SIZE = 100;
+
+class Entity
+{
+private:
+	char str[SIZE];
+	int age;
+
+public:
+	explicit Entity(const char* str) : age(0)
+	{
+		strcpy(this->str, str);
+	}
+
+	Entity(int age) : age(age)
+	{
+		strcpy(this->str, "Unknown");
+	}
+
+	const char* getStr() const
+	{
+		return this->str;
+	}
+
+	int getAge() const
+	{
+		return this->age;
+	}
+};
+
+void print(const Entity& e)
+{
+	std::cout << e.getStr() << " " << e.getAge() << std::endl;
+}
+
+int main()
+{
+	Entity a = "Test"; // не можем, понеже конструкторът е explicit
+	Entity b = 21;
+
+	print(3);
+
+	return 0;
+}
+```
+
 ## Деструктори
 
 - Член-функция, която носи същото име като обекта, от който се извиква, но има `~` отпред
