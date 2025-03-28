@@ -56,7 +56,8 @@ int main()
 
 ## Четене и писане на структури в двоичен файл
 
-### Без динамична памет
+<details>
+<summary> <h3>Без динамична памет</h3> </summary>
 
 ```c++
 #pragma warning (disable: 4996)
@@ -160,7 +161,10 @@ int main()
 }
 ```
 
-### Динамична памет
+</details>
+
+<details>
+<summary> <h3>Динамична памет</h3> </summary>
 
 ```c++
 #pragma warning (disable: 4996)
@@ -286,9 +290,12 @@ int main()
 }
 ```
 
+</details>
+
 ## Четене и писане на масиви от структури в двоичен файл
 
-### Без динамична памет
+<details>
+<summary> <h3>Без динамична памет</h3> </summary>
 
 ```c++
 #pragma warning (disable: 4996)
@@ -492,7 +499,10 @@ int main()
 }
 ```
 
-### Динамична памет
+</details>
+
+<details>
+<summary> <h3>Динамична памет</h3> </summary>
 
 ```c++
 #pragma warning (disable: 4996)
@@ -711,6 +721,8 @@ int main()
 	return 0;
 }
 ```
+
+</details>
 
 ## fstream
 
