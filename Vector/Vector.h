@@ -10,7 +10,6 @@ private:
 	size_t size;
 	size_t capacity;
 
-	explicit Vector(size_t newSize);
 	void resize(size_t newCapacity);
 
 	unsigned int getNextPowerOfTwo(unsigned int n) const;
@@ -21,19 +20,22 @@ private:
 
 public:
 	Vector();
+	explicit Vector(size_t newSize);
 
 	size_t getSize() const;
 	size_t getCapacity() const;
 
 	Vector& push_back(const Type& data);
 	Vector& pop_back();
-	Vector& insert(const Type& data, size_t position);
 
-	Vector& operator+=(const Vector& other);
-	friend Vector operator+(const Vector& lhs, const Vector& rhs);
+	Vector& insert(const Type& data, size_t position);
+	Vector& remove(size_t position);
 
 	Type& operator[](size_t n);
 	const Type& operator[](size_t n) const;
+
+	Vector& operator+=(const Vector& other);
+	friend Vector operator+(const Vector& lhs, const Vector& rhs);
 
 	friend bool operator==(const Vector& lhs, const Vector& rhs);
 	friend bool operator!=(const Vector& lhs, const Vector& rhs);

@@ -72,6 +72,38 @@ Vector& Vector::insert(const Type& data, size_t position)
 	return *this;
 }
 
+Vector& Vector::remove(size_t position)
+{
+	if (position > size)
+	{
+		return *this;
+	}
+
+	for (size_t i = position + 1; i < getSize(); i++)
+	{
+		this->data[i - 1] = this->data[i];
+	}
+
+	this->size--;
+
+	if ((getSize() * 4) <= getCapacity() && getCapacity() > 1)
+	{
+		resize(getCapacity() / 2);
+	}
+
+	return *this;
+}
+
+Type& Vector::operator[](size_t idx)
+{
+	return this->data[idx];
+}
+
+const Type& Vector::operator[](size_t idx) const
+{
+	return this->data[idx];
+}
+
 Vector& Vector::operator+=(const Vector& other)
 {
 	this->size = getSize() + other.getSize();
@@ -93,16 +125,6 @@ Vector operator+(const Vector& lhs, const Vector& rhs)
 	toReturn += rhs;
 
 	return toReturn;
-}
-
-Type& Vector::operator[](size_t idx)
-{
-	return this->data[idx];
-}
-
-const Type& Vector::operator[](size_t idx) const
-{
-	return this->data[idx];
 }
 
 bool operator==(const Vector& lhs, const Vector& rhs)
