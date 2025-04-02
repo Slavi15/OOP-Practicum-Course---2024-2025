@@ -6,7 +6,7 @@ BitSet::BitSet() : data(nullptr), N(0), bucketsCount(0)
 
 BitSet::BitSet(size_t N) : N(N)
 {
-	this->bucketsCount = (N % Constants::BITS == 0) ? getBucketIndex(N) + 1 : getBucketIndex(N);
+	this->bucketsCount = getBucketIndex(N) + 1;
 	this->data = new uint8_t[this->bucketsCount]{ 0 };
 }
 
@@ -15,7 +15,7 @@ void BitSet::add(size_t num)
 	size_t currBucket = getBucketIndex(num);
 	num %= Constants::BITS;
 
-	size_t mask = powerTwo(num);
+	uint8_t mask = powerTwo(num);
 
 	this->data[currBucket] |= mask;
 }
@@ -25,7 +25,7 @@ void BitSet::remove(size_t num)
 	size_t currBucket = getBucketIndex(num);
 	num %= Constants::BITS;
 
-	size_t mask = ~powerTwo(num);
+	uint8_t mask = ~powerTwo(num);
 
 	this->data[currBucket] &= mask;
 }
@@ -35,7 +35,7 @@ bool BitSet::contains(size_t num) const
 	size_t currBucket = getBucketIndex(num);
 	num %= Constants::BITS;
 
-	size_t mask = powerTwo(num);
+	uint8_t mask = powerTwo(num);
 
 	return mask & this->data[currBucket];
 }
@@ -109,7 +109,7 @@ BitSet::~BitSet()
 
 size_t BitSet::getBucketIndex(size_t num) const
 {
-	return N / Constants::BITS;
+	return num / Constants::BITS;
 }
 
 void BitSet::copyFrom(const BitSet& other)
