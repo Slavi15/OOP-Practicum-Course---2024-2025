@@ -129,3 +129,30 @@ class Y
 }
 ```
 
+#### Пример
+
+```c++
+#include <iostream>
+
+class X; // forward declaration на X, понеже Y не знае за неговото съществуване
+
+class Y
+{
+public:
+	void f(X& obj);
+};
+
+class X
+{
+private:
+	int x;
+	char ch;
+
+	friend class Y; // Y има достъп до член-данните на X
+};
+
+void Y::f(X& obj)
+{
+	obj.x = 10;
+}
+```
