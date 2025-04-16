@@ -21,7 +21,7 @@ size_t Vector::getCapacity() const
 }
 
 Vector& Vector::push_back(const Type& data) {
-	if (getSize() >= getCapacity()) 
+	if (getSize() >= getCapacity())
 	{
 		resize(getCapacity() * 2);
 	}
@@ -31,7 +31,7 @@ Vector& Vector::push_back(const Type& data) {
 	return *this;
 }
 
-Vector& Vector::pop_back() 
+Vector& Vector::pop_back()
 {
 	if (getSize())
 	{
@@ -52,7 +52,7 @@ Vector& Vector::pop_back()
 
 Vector& Vector::insert(const Type& data, size_t position)
 {
-	if (position > size) 
+	if (position > size)
 	{
 		return *this;
 	}
@@ -158,7 +158,7 @@ std::istream& operator>>(std::istream& is, Vector& other)
 	other.capacity = other.getNextPowerOfTwo(size);
 
 	other.data = new Type[other.getCapacity()];
-	for (size_t i = 0; i < other.getSize(); i++) 
+	for (size_t i = 0; i < other.getSize(); i++)
 	{
 		is >> other.data[i];
 	}
@@ -168,7 +168,7 @@ std::istream& operator>>(std::istream& is, Vector& other)
 
 std::ostream& operator<<(std::ostream& os, const Vector& other)
 {
-	for (size_t i = 0; i < other.getSize(); i++) 
+	for (size_t i = 0; i < other.getSize(); i++)
 	{
 		os << other.data[i] << " ";
 	}
@@ -188,6 +188,22 @@ Vector& Vector::operator=(const Vector& other)
 	{
 		free();
 		copyFrom(other);
+	}
+
+	return *this;
+}
+
+Vector::Vector(Vector&& other) noexcept
+{
+	moveFrom(std::move(other));
+}
+
+Vector& Vector::operator=(Vector&& other) noexcept
+{
+	if (this != &other)
+	{
+		free();
+		moveFrom(std::move(other));
 	}
 
 	return *this;
@@ -235,6 +251,16 @@ void Vector::resize(size_t newCapacity)
 	this->data = newData;
 
 	this->capacity = newCapacity;
+}
+
+void Vector::moveFrom(Vector&& other) noexcept
+{
+	this->data = other.data;
+	this->size = other.size;
+	this->capacity = other.capacity;
+
+	other.data = nullptr;
+	other.size = other.capacity = 0;
 }
 
 void Vector::copyFrom(const Vector& other)

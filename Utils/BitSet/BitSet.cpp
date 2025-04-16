@@ -102,6 +102,22 @@ BitSet& BitSet::operator=(const BitSet& other)
 	return *this;
 }
 
+BitSet::BitSet(BitSet&& other) noexcept
+{
+	moveFrom(std::move(other));
+}
+
+BitSet& BitSet::operator=(const BitSet& other) noexcept
+{
+	if (this != &other)
+	{
+		free();
+		moveFrom(std::move(other));
+	}
+
+	return *this;
+}
+
 BitSet::~BitSet()
 {
 	free();
@@ -123,6 +139,16 @@ void BitSet::copyFrom(const BitSet& other)
 	{
 		this->data[i] = other.data[i];
 	}
+}
+
+void BitSet::moveFrom(BitSet&& other) noexcept
+{
+	this->data = other.data;
+	this->N = other.N;
+	this->bucketsCount = other.bucketsCount;
+
+	other.data = nullptr;
+	other.N = other.bucketsCount = 0;
 }
 
 void BitSet::free()

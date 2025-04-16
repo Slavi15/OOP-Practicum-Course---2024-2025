@@ -17,6 +17,7 @@ private:
 
 	void free();
 	void copyFrom(const Vector& other);
+	void moveFrom(Vector&& other) noexcept;
 
 public:
 	Vector();
@@ -45,6 +46,9 @@ public:
 
 	Vector(const Vector& other);
 	Vector& operator=(const Vector& other);
+
+	Vector(Vector&& other) noexcept;
+	Vector& operator=(Vector&& other) noexcept;
 
 	Vector& clear();
 

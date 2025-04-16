@@ -32,6 +32,22 @@ String& String::operator=(const String& other)
 	return *this;
 }
 
+String::String(String&& other) noexcept
+{
+	moveFrom(std::move(other));
+}
+
+String& String::operator=(String&& other) noexcept
+{
+	if (this != &other)
+	{
+		free();
+		moveFrom(std::move(other));
+	}
+
+	return *this;
+}
+
 const char* String::c_str() const
 {
 	return this->data;
@@ -184,6 +200,16 @@ void String::copyFrom(const String& other)
 
 	this->data = new char[strlen(other.data) + 1];
 	strcpy(this->data, other.data);
+}
+
+void String::moveFrom(String&& other) noexcept
+{
+	this->data = other.data;
+	this->size = other.size;
+	this->capacity = other.capacity;
+
+	other.data = nullptr;
+	other.size = other.capacity = 0;
 }
 
 void String::free()

@@ -23,6 +23,7 @@ private:
 	void resize(size_t newCapacity);
 
 	void copyFrom(const String& other);
+	void moveFrom(String&& other) noexcept;
 	void free();
 
 public:
@@ -31,6 +32,9 @@ public:
 
 	String(const String& other);
 	String& operator=(const String& other);
+
+	String(String&& other) noexcept;
+	String& operator=(String&& other) noexcept;
 
 	const char* c_str() const;
 

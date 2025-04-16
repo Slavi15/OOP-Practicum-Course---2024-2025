@@ -1,9 +1,11 @@
 #pragma once
+
 #include <iostream>
 
 #define powerTwo(x) (1 << x)
 
-namespace Constants {
+namespace Constants
+{
 	constexpr size_t BITS = 8;
 }
 
@@ -17,6 +19,7 @@ private:
 	size_t getBucketIndex(size_t num) const;
 
 	void copyFrom(const BitSet& other);
+	void moveFrom(BitSet&& other) noexcept;
 	void free();
 
 public:
@@ -34,6 +37,9 @@ public:
 
 	BitSet(const BitSet& other);
 	BitSet& operator=(const BitSet& other);
+
+	BitSet(BitSet&& other) noexcept;
+	BitSet& operator=(BitSet&& other) noexcept;
 
 	~BitSet();
 };
