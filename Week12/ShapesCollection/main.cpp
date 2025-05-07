@@ -15,18 +15,7 @@ int main()
 	std::cout << collection.getIsPointInByIndex(0, 1, 1) << std::endl;
 	std::cout << collection.getIsPointInByIndex(0, 2, 1) << std::endl;
 
-	Intersection intersection = collection[0]->intersect(collection[1]);
-
-	if (
-		(intersection.lhsShape == ShapeType::TRIANGLE && intersection.rhsShape == ShapeType::RECTANGLE) ||
-		(intersection.lhsShape == ShapeType::RECTANGLE && intersection.rhsShape == ShapeType::TRIANGLE))
-	{
-		std::cout << "Triangle + Rectangle" << std::endl;
-	}
-	else
-	{
-		std::cout << "No intersection!" << std::endl;
-	}
+	bool areIntersect = collection[0]->intersect(collection[1]);
 
 	return 0;
 }
