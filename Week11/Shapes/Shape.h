@@ -3,6 +3,23 @@
 #include <iostream>
 #include <cassert>
 
+enum class ShapeType
+{
+	TRIANGLE,
+	RECTANGLE,
+	CIRCLE
+};
+
+struct Intersection
+{
+	ShapeType lhsShape;
+	ShapeType rhsShape;
+};
+
+class Triangle;
+class Rectangle;
+class Circle;
+
 class Shape
 {
 protected:
@@ -11,8 +28,13 @@ protected:
 		int x = 0;
 		int y = 0;
 
-		Point() : x(0), y(0) {}
-		Point(int x, int y) : x(x), y(y) {}
+		Point() : x(0), y(0)
+		{
+		}
+
+		Point(int x, int y) : x(x), y(y)
+		{
+		}
 
 		double getDistance(const Point& other) const
 		{
@@ -29,8 +51,8 @@ private:
 	Point* points = nullptr;
 	size_t size = 0;
 
-	void copyFrom(const Shapes& other);
-	void moveFrom(Shapes&& other) noexcept;
+	void copyFrom(const Shape& other);
+	void moveFrom(Shape&& other) noexcept;
 	void free();
 
 public:
@@ -52,6 +74,12 @@ public:
 	virtual double getPerimeter() const;
 
 	virtual bool isPointInside(int x, int y) const = 0;
+
+	virtual Intersection intersect(const Shape* shape) const = 0;
+
+	virtual Intersection intersectWith(const Triangle* shape) const = 0;
+	virtual Intersection intersectWith(const Rectangle* shape) const = 0;
+	virtual Intersection intersectWith(const Circle* shape) const = 0;
 
 	virtual ~Shape() noexcept;
 };

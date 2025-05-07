@@ -20,4 +20,10 @@ public:
 	double getArea() const override;
 	double getPerimeter() const override;
 	bool isPointInside(int x, int y) const override;
+
+	Intersection intersect(const Shape* shape) const override;
+
+	Intersection intersectWith(const Triangle* shape) const override;
+	Intersection intersectWith(const Rectangle* shape) const override;
+	Intersection intersectWith(const Circle* shape) const override;
 };

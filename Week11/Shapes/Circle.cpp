@@ -30,3 +30,23 @@ bool Circle::isPointInside(int x, int y) const
 	Shape::Point p(x, y);
 	return getPointAtIndex(0).getDistance(p) < getRadius();
 }
+
+Intersection Circle::intersect(const Shape* shape) const
+{
+	return shape->intersectWith(this);
+}
+
+Intersection Circle::intersectWith(const Triangle* shape) const
+{
+	return Intersection{ ShapeType::CIRCLE, ShapeType::TRIANGLE };
+}
+
+Intersection Circle::intersectWith(const Rectangle* shape) const
+{
+	return Intersection{ ShapeType::CIRCLE, ShapeType::RECTANGLE };
+}
+
+Intersection Circle::intersectWith(const Circle* shape) const
+{
+	return Intersection{ ShapeType::CIRCLE, ShapeType::CIRCLE };
+}

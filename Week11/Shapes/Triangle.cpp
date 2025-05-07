@@ -45,3 +45,23 @@ bool Triangle::isPointInside(int x, int y) const
 
 	return abs(t1.getArea() + t2.getArea() + t3.getArea() - getArea()) <= std::numeric_limits<double>::epsilon(); // 0.0001
 }
+
+Intersection Triangle::intersect(const Shape* shape) const
+{
+	return shape->intersectWith(this);
+}
+
+Intersection Triangle::intersectWith(const Triangle* shape) const
+{
+	return Intersection{ ShapeType::TRIANGLE, ShapeType::TRIANGLE };
+}
+
+Intersection Triangle::intersectWith(const Rectangle* shape) const
+{
+	return Intersection{ ShapeType::TRIANGLE, ShapeType::RECTANGLE };
+}
+
+Intersection Triangle::intersectWith(const Circle* shape) const
+{
+	return Intersection{ ShapeType::TRIANGLE, ShapeType::CIRCLE };
+}

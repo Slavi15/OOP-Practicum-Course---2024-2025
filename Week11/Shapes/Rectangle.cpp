@@ -28,3 +28,23 @@ bool Rectangle::isPointInside(int x, int y) const
 	Shape::Point p(x, y);
 	return p.x >= getPointAtIndex(0).x && p.x <= getPointAtIndex(1).x && p.y >= getPointAtIndex(0).y && p.y <= getPointAtIndex(3).y;
 }
+
+Intersection Rectangle::intersect(const Shape* shape) const
+{
+	return shape->intersectWith(this);
+}
+
+Intersection Rectangle::intersectWith(const Triangle* shape) const
+{
+	return Intersection{ ShapeType::RECTANGLE, ShapeType::TRIANGLE };
+}
+
+Intersection Rectangle::intersectWith(const Rectangle* shape) const
+{
+	return Intersection{ ShapeType::RECTANGLE, ShapeType::RECTANGLE };
+}
+
+Intersection Rectangle::intersectWith(const Circle* shape) const
+{
+	return Intersection{ ShapeType::RECTANGLE, ShapeType::CIRCLE };
+}
