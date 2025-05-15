@@ -2,9 +2,10 @@
 
 #include <iostream>
 
-#define TT template <typename T>
+// FIFO
+// First-In First-Out
 
-TT
+template <typename T>
 class Queue
 {
 private:
@@ -50,19 +51,19 @@ public:
 	~Queue() noexcept;
 };
 
-TT
+template <typename T>
 inline Queue<T>::Queue() : Queue(4)
 {
 }
 
-TT
+template <typename T>
 inline Queue<T>::Queue(size_t newSize) : size(0)
 {
 	this->capacity = allocateCapacity(newSize);
 	this->data = new T[this->capacity];
 }
 
-TT
+template <typename T>
 inline void Queue<T>::resize(size_t newCapacity)
 {
 	T* newData = new T[newCapacity];
@@ -81,19 +82,19 @@ inline void Queue<T>::resize(size_t newCapacity)
 	this->put = this->size;
 }
 
-TT
+template <typename T>
 inline size_t Queue<T>::getSize() const
 {
 	return this->size;
 }
 
-TT
+template <typename T>
 inline size_t Queue<T>::getCapacity() const
 {
 	return this->capacity;
 }
 
-TT
+template <typename T>
 inline Queue<T>& Queue<T>::push(const T& elem)
 {
 	if (getSize() >= getCapacity())
@@ -108,7 +109,7 @@ inline Queue<T>& Queue<T>::push(const T& elem)
 	return *this;
 }
 
-TT
+template <typename T>
 inline Queue<T>& Queue<T>::push(T&& elem)
 {
 	if (getSize() >= getCapacity())
@@ -123,7 +124,7 @@ inline Queue<T>& Queue<T>::push(T&& elem)
 	return *this;
 }
 
-TT
+template <typename T>
 inline Queue<T>& Queue<T>::pop()
 {
 	if (empty())
@@ -142,25 +143,25 @@ inline Queue<T>& Queue<T>::pop()
 	return *this;
 }
 
-TT
+template <typename T>
 inline const T& Queue<T>::front() const
 {
 	return this->data[get];
 }
 
-TT
+template <typename T>
 inline bool Queue<T>::empty() const
 {
 	return this->size == 0;
 }
 
-TT
+template <typename T>
 inline Queue<T>::Queue(const Queue& other)
 {
 	copyFrom(other);
 }
 
-TT
+template <typename T>
 inline Queue<T>& Queue<T>::operator=(const Queue& other)
 {
 	if (this != &other)
@@ -172,13 +173,13 @@ inline Queue<T>& Queue<T>::operator=(const Queue& other)
 	return *this;
 }
 
-TT
+template <typename T>
 inline Queue<T>::Queue(Queue&& other) noexcept
 {
 	moveFrom(std::move(other));
 }
 
-TT
+template <typename T>
 inline Queue<T>& Queue<T>::operator=(Queue&& other) noexcept
 {
 	if (this != &other)
@@ -190,13 +191,13 @@ inline Queue<T>& Queue<T>::operator=(Queue&& other) noexcept
 	return *this;
 }
 
-TT
+template <typename T>
 inline Queue<T>::~Queue() noexcept
 {
 	free();
 }
 
-TT
+template <typename T>
 inline unsigned int Queue<T>::getNextPowerOfTwo(unsigned int n) const
 {
 	if (n == 0) return 1;
@@ -209,13 +210,13 @@ inline unsigned int Queue<T>::getNextPowerOfTwo(unsigned int n) const
 	return n << 1;
 }
 
-TT
+template <typename T>
 inline unsigned int Queue<T>::allocateCapacity(unsigned int n) const
 {
 	return std::max(getNextPowerOfTwo(n + 1), 8u);
 }
 
-TT
+template <typename T>
 inline void Queue<T>::copyFrom(const Queue& other)
 {
 	this->size = other.size;
@@ -231,7 +232,7 @@ inline void Queue<T>::copyFrom(const Queue& other)
 	}
 }
 
-TT
+template <typename T>
 inline void Queue<T>::moveFrom(Queue&& other) noexcept
 {
 	this->data = other.data;
@@ -246,7 +247,7 @@ inline void Queue<T>::moveFrom(Queue&& other) noexcept
 	other.size = other.capacity = other.get = other.put = 0;
 }
 
-TT
+template <typename T>
 inline void Queue<T>::free()
 {
 	delete[] this->data;
