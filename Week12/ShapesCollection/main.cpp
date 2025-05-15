@@ -1,21 +1,17 @@
 #include <iostream>
+#include <fstream>
 
 #include "ShapesCollection.h"
 
 int main()
 {
-	ShapesCollection collection;
+	uint32_t arr[10] = { 100, 210, 14, 10, 1, 1004, 50 };
 
-	collection.addFigure(ShapeType::TRIANGLE); // 0 0 3 0 3 4
-	collection.addFigure(ShapeType::RECTANGLE); // 0 0 4 4
-	collection.addFigure(ShapeType::CIRCLE); // 0 0 2
+	std::ofstream ofs("input.bin", std::ios::out);
 
-	std::cout << collection.getAreaByIndex(0) << std::endl;
+	ofs.write(reinterpret_cast<const char*>(arr), sizeof(uint32_t) * 10);
 
-	std::cout << collection.getIsPointInByIndex(0, 1, 1) << std::endl;
-	std::cout << collection.getIsPointInByIndex(0, 2, 1) << std::endl;
-
-	bool areIntersect = collection[0]->intersect(collection[1]);
+	ofs.close();
 
 	return 0;
 }
